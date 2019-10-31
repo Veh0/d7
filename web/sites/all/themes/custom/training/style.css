@@ -1,0 +1,97 @@
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+div#header {
+  background-color: #074581;
+  padding: 2% 0;
+  border-bottom: #de0019 2vh solid;
+  margin-bottom: -3vh;
+}
+div#header .section div.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+div#header .section div.container div:first-child {
+  flex-basis: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+div#header .section div.container div:first-child a {
+  text-decoration: none;
+  color: white;
+  margin-right: 1%;
+}
+div#header .section a#logo {
+  float: left;
+}
+div#header .section div.region-header {
+  flex-basis: 25%;
+}
+div#header .section div.region-header div#block-system-navigation .content {
+  width: 100%;
+}
+div#header .section div.region-header div#block-system-navigation .content ul {
+  justify-items: right;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  margin-left: 0;
+  padding: 0;
+}
+div#header .section div.region-header div#block-system-navigation .content ul li.leaf {
+  width: 17vh;
+  list-style: none;
+  text-align: center;
+}
+div#header .section div.region-header div#block-system-navigation .content ul a {
+  display: block;
+  text-decoration: none;
+  color: white;
+}
+
+div#content div.block div.view-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+div#content div.block div.view-content > div {
+  flex: 1 1 0;
+  margin: 0 auto;
+}
+
+div.region-content-top .content img {
+  width: 100%;
+  margin-top: 0;
+}
+
+div#footer-wrapper {
+  background-color: #074581;
+}
+div#footer-wrapper .container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  color: white;
+}
+div#footer-wrapper .container > div {
+  width: 25%;
+  margin: 0 3%;
+}
+div#footer-wrapper .container ul {
+  margin-left: 0;
+  padding: 0;
+}
+div#footer-wrapper .container li {
+  list-style: none;
+}
+div#footer-wrapper .container a {
+  text-decoration: none;
+  color: white;
+}
+
+/*# sourceMappingURL=style.css.map */

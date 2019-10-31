@@ -1,0 +1,136 @@
+<?php
+
+/**
+ * Implement hook_menu()
+ */
+function adimeo_weather_menu()
+{
+  $items = array();
+
+  $items['admin/structure/block/manage/adimeo_weather/adimeo_weather_block/configure'] = array(
+    'title' => t('Adimeo Weather'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('adimeo_weather_form'),
+    'access arguments' => array('administer site configuration')
+  );
+  $items['weather/%'] = array(
+    'title' => t("Adimeo Weather"),
+    'page callback' => 'adimeo_get_var',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+  );
+
+  return $items;
+}
+
+
+/**
+ * @return mixed
+ */
+function adimeo_weather_form()
+{
+  $form["location"] = array(
+    "#title" => 'Location',
+    '#type' => 'textfield',
+    '#required' => true
+  );
+  $form["lang"] = array(
+    "#title" => 'Language',
+    '#type' => 'textfield',
+    '#required' => false,
+    '#default_value' => 'en'
+  );
+  $form["apiKey"] = array(
+    "#title" => 'API key',
+    '#type' => 'textfield',
+    '#required' => true
+  );
+
+  return system_settings_form($form);
+}
+
+function adimeo_get_var($variables)
+{
+  $arrayVar = explode(",", $variables);
+
+  $location = $arrayVar[0];
+  $lang = (array_key_exists(1, $arrayVar)) ? $arrayVar[1] : 'en';
+  $apiKey = "98cc78a4f69293ab05786dabf8e80d01";
+
+  return theme('adimeo_weather_theme', weather_api($location, $lang, $apiKey));
+}
+
+/**
+ * Implement hook_block_info()
+ */
+function adimeo_weather_block_info()
+{
+  return array(
+    'adimeo_weather_block' => array(
+      'info' => t("Weather Block"),
+      'cache' => DRUPAL_NO_CACHE
+    )
+  );
+}
+
+/**
+ * Implement hook_block_view()
+ */
+function adimeo_weather_block_view($delta)
+{
+  switch ($delta)
+  {
+    case 'adimeo_weather_block':
+      $result = array(
+        "location" => variable_get("location"),
+        "lang" => variable_get("lang"),
+        "apiKey" => variable_get("apiKey")
+      );
+      $block = array(
+        'subject' => t("Meteo"),
+        'content' => adimeo_weather_get_content()
+      );
+      break;
+  }
+
+  return $block;
+}
+
+/**
+ * Implement hook_theme()
+ */
+function adimeo_weather_theme()
+{
+
+  return array(
+    'adimeo_weather_theme' => array(
+      'template' => 'adimeo_weather',
+      'arguments' => array('icon' => null, 'location' => null, 'weather' => null, 'temperature' => null),
+    )
+  );
+}
+
+function adimeo_weather_get_content()
+{
+  $location = variable_get("location");
+  $lang = variable_get("lang");
+  $apiKey = variable_get("apiKey");
+
+  return theme('adimeo_weather_theme', weather_api($location, $lang, $apiKey));
+}
+
+function weather_api($location, $lang, $apiKey)
+{
+  $data = file_get_contents('https://api.openweathermap.org/data/2.5/weather?q='.$location.'&lang='.$lang.'&appid='.$apiKey);
+  $data = json_decode($data, true);
+
+  $result = array(
+    'icon' => $data["weather"][0]["icon"],
+    'location' => $location,
+    'weather' => $data["weather"][0]["description"],
+    'temperature' => $data["main"]["temp"] -273.15
+  );
+
+  return $result;
+}
+
