@@ -1,3 +1,14 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "Montserrat";
+  src: url("fonts/Montserrat/Montserrat-Regular.otf");
+  font-style: normal;
+  font-weight: normal;
+}
+* {
+  font-family: "Montserrat";
+}
+
 .container {
   width: 90%;
   margin: 0 auto;
@@ -60,8 +71,37 @@ div#content div.block div.view-content {
   justify-content: space-between;
 }
 div#content div.block div.view-content > div {
-  flex: 1 1 0;
+  width: 30%;
   margin: 0 auto;
+}
+div#content div.block div.view-content > div div.field-name-field-article-title {
+  font-size: 1em;
+  font-weight: bolder;
+  margin-bottom: 3%;
+}
+div#content div.block div.view-content > div div.field-name-field-published-date {
+  font-weight: bolder;
+  color: #de0019;
+}
+
+div.block-views h2 {
+  font-size: 1.4em;
+  font-weight: bolder;
+}
+div.block-views h2::before {
+  content: "-";
+  font-stretch: expanded;
+  margin-right: 1.5%;
+  color: #de0019;
+}
+
+div#block-views-nos-locaux-block h2 {
+  width: 90%;
+  margin: 0 auto;
+}
+
+div#block-system-main {
+  display: none;
 }
 
 div.region-content-top .content img {
@@ -79,7 +119,6 @@ div#footer-wrapper .container {
   color: white;
 }
 div#footer-wrapper .container > div {
-  width: 25%;
   margin: 0 3%;
 }
 div#footer-wrapper .container ul {
@@ -92,6 +131,106 @@ div#footer-wrapper .container li {
 div#footer-wrapper .container a {
   text-decoration: none;
   color: white;
+}
+
+div#block-block-2 div.content {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+div#block-block-2 div.content p {
+  width: 50%;
+}
+div#block-block-2 div.content a {
+  text-decoration: none;
+  font-size: 2em;
+  color: #074581;
+}
+div#block-block-2 div.content a[href*="tel:"]::before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  margin-right: 5%;
+}
+div#block-block-2 div.content a[href*="#"]::before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  margin-right: 5%;
+}
+
+div#block-views-job-block div.content {
+  margin-top: 6em;
+  justify-content: space-between;
+  text-align: center;
+}
+div#block-views-job-block div.content .views-row:not(:last-child) {
+  position: relative;
+}
+div#block-views-job-block div.content .views-row:not(:last-child)::after {
+  position: absolute;
+  right: 0;
+  top: -10vh;
+  content: "";
+  display: block;
+  height: 15vh;
+  border-right: #de0019 solid 2px;
+  transform: skew(-40deg);
+}
+div#block-views-job-block div.content a {
+  text-decoration: none;
+  color: gray;
+  font-style: italic;
+  position: relative;
+  font-size: 1.5em;
+}
+div#block-views-job-block div.content a::before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  position: absolute;
+  font-style: normal;
+  font-size: 2.5em;
+  left: 2vh;
+  top: -9.5vh;
+  color: #074581;
+}
+div#block-views-job-block div.content a[href*="2"]::before {
+  content: "";
+}
+div#block-views-job-block div.content a[href*="3"]::before {
+  content: "";
+  left: 5vh;
+}
+div#block-views-job-block div.content a[href*="1"]::before {
+  content: "";
+  left: 4vh;
+}
+
+div[class*=firstcolumn] {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 40%;
+}
+div[class*=firstcolumn] img {
+  flex-basis: 100%;
+}
+div[class*=firstcolumn] p:last-child a {
+  font-weight: lighter;
+  font-style: italic;
+}
+div[class*=firstcolumn]::after {
+  position: absolute;
+  right: 10vh;
+  top: 10vh;
+  content: "";
+  display: block;
+  height: 20vh;
+  border-right: white solid 2px;
+  transform: skew(-40deg);
 }
 
 /*# sourceMappingURL=style.css.map */
